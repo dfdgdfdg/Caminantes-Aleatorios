@@ -1,7 +1,7 @@
 #Simulo el camino aleatorio
 import numpy as np
 import pandas as pd
-import geopandas as gpd
+#import geopandas as gpd
 
 def simular_caminata(
     G,
@@ -189,7 +189,7 @@ def estimar_tiempos_nodo(
             maximo = np.nan
 
         # Columnas dinámicas:
-        resultado[f"t{k}"] = tiempo_promedio
+        resultado[f"promedio_x{k}"] = tiempo_promedio
         resultado[f"mediana_x{k}"] = mediana
         resultado[f"desvio_x{k}"] = desvio
         resultado[f"minimo_x{k}"] = minimo
@@ -198,7 +198,7 @@ def estimar_tiempos_nodo(
 
     return resultado, valores_xk
 
-def estimar_tiempos_nodo_completo(
+def estimar_tiempos_nodo_completo( #devuelve además el la caminata completa, no solo informacion de los tiempos de la misma
     G,
     clases,
     nodo_inicial,
@@ -289,7 +289,7 @@ def estimar_tiempos_nodo_completo(
             maximo = np.nan
 
         # Estadísticas dinámicas
-        resultado[f"t{k}"] = (tiempo_promedio)
+        resultado[f"promedio_x{k}"] = (tiempo_promedio)
         resultado[f"mediana_x{k}"] = (mediana)
         resultado[f"desvio_x{k}"] = (desvio)
         resultado[f"minimo_x{k}"] = (minimo)
@@ -300,7 +300,7 @@ def estimar_tiempos_nodo_completo(
 
     resultados_caminatas = pd.DataFrame(resultados_caminatas)
     return resultado, valores_xk, resultados_caminatas
-
+"""
 radios = gpd.read_file("radios-censales-2022.geojson")
 
 columnas_codigo = ["codigo","cod_prov","cod_dep","fraccion","radio"]
@@ -333,3 +333,4 @@ radios_estudio = radios_estudio.reset_index(drop=True)
 radios_estudio["prov_dep"] = radios_estudio["cod_prov"] + radios_estudio["cod_dep"]
 radios_estudio["jurisdiccion"] = np.where(radios_estudio["cod_prov"] == "02","CABA","Provincia de Buenos Aires")
 radios_estudio["area_nombre"] = np.where(radios_estudio["cod_prov"] == "02","CABA",radios_estudio["cod_dep"].map(PARTIDOS_SELECCIONADOS))
+"""
